@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafios</title>
+</head>
+<body>
+    <div class="exercicio-1">
+        <h2>Desafio número 1</h2>
+        <h3>Sequência de Fibonacci:</h3>
+        
+        <form id="formularioFibonacci">
+            <h4>Informe um número para calcular Fibonacci:</h4>
+            <input type="number" id="campoNumeroFibonacci">
+            <button type="submit" id="botaoFibonacci">Calcular Fibonacci</button>
+            <br>
+            <h4>Valor de Fibonacci para o número dado:</h4>
+            <input type="text" id="campoRespostaFibonacci">
+        </form>
+    </div>
+    <div class="exercicio-2">
+        <h2>Desafio número 2</h2>
+        <h3>Contagem de ocorrências da letra 'a':</h3>
+        <form id="formularioRepeticao">
+            <h4>Digite o texto para contagem de ocorrências:</h4>
+            <input type="text" id="campoContagem">
+            <button type="submit" id="botaoContar">Contar</button>
+            <br>
+            <h4>Quantidade de ocorrências da letra 'a' no texto inserido:</h4>
+            <input type="text" id="ocorrencias">
+        </form>
+    </div>
+    <script type="text/javascript">
+        // Ao receber 1 como parâmetro a função captura os dados do exercicio 1
+        // Ao receber 2 como parâmetro a função captura os dados do exercicio 2
+        function capturarDados(x){
+            if(x == 1){
+                let inputFibonacci = document.getElementById("campoNumeroFibonacci").value;
+                return inputFibonacci;
+            } else if(x == 2){
+                let strContagem = document.getElementById("campoContagem").value;
+                return strContagem;
+            }
+            
+        }
+
+        function fibonacci(valorFibonacci){
+            if(valorFibonacci <= 1){
+                return valorFibonacci;
+            }
+            let a = 0;
+            let b = 1;
+            for(let i = 2; i <= valorFibonacci; i++){
+                let temp = a + b;
+                a = b;
+                b = temp;
+            }
+            return b;
+        }
+
+        function calcularFibobacci(){
+            event.preventDefault();
+            let inputFibonacci = capturarDados(1);
+            let resultado = fibonacci(inputFibonacci);
+            document.getElementById("campoRespostaFibonacci").value = resultado;
+        }
+
+        function ocorrenciasDeA(texto){
+            let cont = 0;
+            for(let i = 0; i < texto.length; i++){
+                if(texto[i] == 'a' || texto[i] == 'A'){
+                    cont++;
+                }
+            }
+            return cont;
+        }
+
+        function calcularOcorrenciasDeA(){
+            event.preventDefault();
+            let textoEntrada = capturarDados(2);
+            let resultado = ocorrenciasDeA(textoEntrada);
+            document.getElementById("ocorrencias").value = resultado;
+        }
+
+        document.getElementById("formularioFibonacci").addEventListener('submit', calcularFibobacci);
+        document.getElementById("formularioRepeticao").addEventListener('submit', calcularOcorrenciasDeA);
+    </script>
+</body>
+</html>
